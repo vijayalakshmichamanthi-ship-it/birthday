@@ -1,0 +1,612 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Happy Birthday Roshitha 🎂</title>
+
+<style>
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    overflow: hidden;
+    font-family: Arial, sans-serif;
+    color: white;
+    background: radial-gradient(circle at top, #7928a8, #16051f 70%);
+}
+
+canvas {
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+}
+
+.container {
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    z-index: 2;
+}
+
+.card {
+    width: 90%;
+    max-width: 650px;
+    min-height: 550px;
+    padding: 35px 25px;
+    border-radius: 30px;
+    text-align: center;
+
+    background: rgba(255,255,255,0.10);
+    backdrop-filter: blur(15px);
+
+    border: 1px solid rgba(255,255,255,0.2);
+    box-shadow: 0 20px 70px rgba(0,0,0,0.5);
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.scene {
+    width: 100%;
+}
+
+.emoji {
+    font-size: 75px;
+    animation: bounce 1s infinite alternate;
+}
+
+h1 {
+    font-size: clamp(35px, 8vw, 70px);
+    margin: 10px;
+}
+
+.name {
+    font-size: clamp(50px, 12vw, 100px);
+    font-weight: bold;
+
+    background: linear-gradient(
+        90deg,
+        #ffd166,
+        #ff5fa2,
+        #8eeaff,
+        #ffd166
+    );
+
+    background-size: 300%;
+    -webkit-background-clip: text;
+    color: transparent;
+
+    animation: shine 3s linear infinite;
+}
+
+.message {
+    font-size: clamp(18px, 4vw, 26px);
+    line-height: 1.5;
+}
+
+button {
+    border: none;
+    padding: 16px 28px;
+    border-radius: 50px;
+
+    font-size: 18px;
+    font-weight: bold;
+
+    background: #ffd166;
+    color: #32103f;
+
+    cursor: pointer;
+
+    box-shadow: 0 8px 25px rgba(0,0,0,0.4);
+
+    transition: 0.2s;
+}
+
+button:hover {
+    transform: scale(1.08);
+}
+
+/* Hide scenes */
+
+.hidden {
+    display: none;
+}
+
+/* Cake */
+
+.cake {
+    position: relative;
+    width: 220px;
+    height: 150px;
+    margin: 20px auto;
+}
+
+.cake-bottom {
+    position: absolute;
+    bottom: 0;
+    left: 10px;
+
+    width: 200px;
+    height: 80px;
+
+    background: linear-gradient(#ff78a8, #d93272);
+
+    border-radius: 15px 15px 25px 25px;
+
+    box-shadow:
+        inset 0 -10px rgba(120,0,50,0.2),
+        0 10px 20px rgba(0,0,0,0.3);
+}
+
+.cream {
+    position: absolute;
+    bottom: 65px;
+    left: 10px;
+
+    width: 200px;
+    height: 30px;
+
+    background: white;
+    border-radius: 50%;
+}
+
+.cream::before,
+.cream::after {
+    content: "";
+    position: absolute;
+
+    width: 30px;
+    height: 30px;
+
+    background: white;
+
+    border-radius: 50%;
+
+    top: 10px;
+}
+
+.cream::before {
+    left: 40px;
+}
+
+.cream::after {
+    right: 40px;
+}
+
+.candle {
+    position: absolute;
+
+    width: 12px;
+    height: 55px;
+
+    background: #8eeaff;
+
+    bottom: 90px;
+
+    border-radius: 5px;
+}
+
+.candle:nth-child(1) {
+    left: 70px;
+}
+
+.candle:nth-child(2) {
+    left: 105px;
+}
+
+.candle:nth-child(3) {
+    left: 140px;
+}
+
+.flame {
+    position: absolute;
+
+    width: 18px;
+    height: 28px;
+
+    background: #ffd166;
+
+    border-radius: 50% 50% 50% 50%;
+
+    top: -25px;
+    left: -3px;
+
+    box-shadow: 0 0 20px #ff9f00;
+
+    animation: flame 0.3s infinite alternate;
+}
+
+.knife {
+    position: absolute;
+
+    width: 120px;
+    height: 10px;
+
+    background: silver;
+
+    right: -50px;
+    top: 80px;
+
+    transform: rotate(-25deg);
+
+    animation: cutCake 2s forwards;
+}
+
+.knife::after {
+    content: "";
+
+    position: absolute;
+
+    width: 45px;
+    height: 16px;
+
+    background: #333;
+
+    right: -40px;
+    top: -3px;
+
+    border-radius: 5px;
+}
+
+@keyframes bounce {
+    from {
+        transform: translateY(0);
+    }
+
+    to {
+        transform: translateY(-12px);
+    }
+}
+
+@keyframes shine {
+    to {
+        background-position: 300%;
+    }
+}
+
+@keyframes flame {
+    from {
+        transform: scale(1);
+    }
+
+    to {
+        transform: scale(1.2) rotate(3deg);
+    }
+}
+
+@keyframes cutCake {
+    0% {
+        transform: translate(100px,-50px) rotate(-25deg);
+    }
+
+    60% {
+        transform: translate(0,0) rotate(-25deg);
+    }
+
+    100% {
+        transform: translate(0,15px) rotate(-25deg);
+    }
+}
+
+#surprise {
+    animation: surprise 1s ease;
+}
+
+@keyframes surprise {
+    from {
+        transform: scale(0.5);
+        opacity: 0;
+    }
+
+    to {
+        transform: scale(1);
+        opacity: 1;
+    }
+}
+
+.small {
+    opacity: 0.6;
+    font-size: 13px;
+    margin-top: 20px;
+}
+</style>
+</head>
+
+<body>
+
+<canvas id="confetti"></canvas>
+
+<div class="container">
+
+<div class="card">
+
+<div class="scene">
+
+<!-- SCENE 1 -->
+
+<div id="scene1">
+
+<div class="emoji">🎂</div>
+
+<h1>HAPPY BIRTHDAY</h1>
+
+<div class="name">
+ROSHITHA! 🎉
+</div>
+
+<p class="message">
+🚨 BREAKING NEWS 🚨<br>
+
+One crazy girl has officially survived another year! 😂
+</p>
+
+<button onclick="nextScene()">
+🎁 START THE SURPRISE
+</button>
+
+</div>
+
+
+<!-- SCENE 2 : CAKE -->
+
+<div id="scene2" class="hidden">
+
+<h1>🎂 CAKE TIME! 🎂</h1>
+
+<p class="message">
+Okay Roshitha...<br>
+Make a wish! ✨
+</p>
+
+<div class="cake">
+
+<div class="candle">
+<div class="flame"></div>
+</div>
+
+<div class="candle">
+<div class="flame"></div>
+</div>
+
+<div class="candle">
+<div class="flame"></div>
+</div>
+
+<div class="cream"></div>
+
+<div class="cake-bottom"></div>
+
+<div class="knife"></div>
+
+</div>
+
+<p>
+🎵 Birthday cake incoming... 🎵
+</p>
+
+<button onclick="cutCake()">
+🔪 CUT THE CAKE!
+</button>
+
+</div>
+
+
+<!-- SCENE 3 : SURPRISE -->
+
+<div id="surprise" class="hidden">
+
+<div class="emoji">
+🥳🎁✨
+</div>
+
+<h1>
+SURPRISE!
+</h1>
+
+<div class="name">
+ROSHITHA
+</div>
+
+<p class="message">
+
+😂 You're not getting old...<br>
+
+You're becoming a
+<b>LIMITED EDITION CLASSIC!</b> 😎
+
+<br><br>
+
+🍕 May your snacks never finish<br>
+
+📶 May your Wi-Fi never disconnect<br>
+
+📚 May your assignments complete themselves<br>
+
+💖 And may your happiness never end!
+
+</p>
+
+<h2>
+💜 BEST FRIEND FOREVER 💜
+</h2>
+
+<button onclick="location.reload()">
+🔁 WATCH AGAIN
+</button>
+
+</div>
+
+<div class="small">
+Made with friendship + chaos + birthday magic ✨
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+
+<script>
+
+const canvas = document.getElementById("confetti");
+
+const ctx = canvas.getContext("2d");
+
+let W;
+let H;
+
+function resize() {
+
+    W = canvas.width = window.innerWidth;
+    H = canvas.height = window.innerHeight;
+
+}
+
+resize();
+
+window.addEventListener("resize", resize);
+
+
+let confetti = [];
+
+const colors = [
+    "#ffd166",
+    "#ff5fa2",
+    "#8eeaff",
+    "#b8ff9b",
+    "#ffffff"
+];
+
+
+function createConfetti(amount) {
+
+    for(let i = 0; i < amount; i++) {
+
+        confetti.push({
+
+            x: W / 2,
+
+            y: H / 2,
+
+            vx: (Math.random() - 0.5) * 18,
+
+            vy: (Math.random() - 0.8) * 16,
+
+            size: Math.random() * 10 + 4,
+
+            rotation: Math.random() * 6,
+
+            life: 100 + Math.random() * 120,
+
+            color:
+                colors[
+                    Math.floor(
+                        Math.random() * colors.length
+                    )
+                ]
+
+        });
+
+    }
+
+}
+
+
+function animateConfetti() {
+
+    ctx.clearRect(0,0,W,H);
+
+    for(let i = confetti.length - 1; i >= 0; i--) {
+
+        let p = confetti[i];
+
+        p.x += p.vx;
+
+        p.y += p.vy;
+
+        p.vy += 0.15;
+
+        p.rotation += 0.1;
+
+        p.life--;
+
+        ctx.save();
+
+        ctx.translate(p.x,p.y);
+
+        ctx.rotate(p.rotation);
+
+        ctx.fillStyle = p.color;
+
+        ctx.fillRect(
+            -p.size/2,
+            -p.size/2,
+            p.size,
+            p.size * 1.6
+        );
+
+        ctx.restore();
+
+
+        if(
+            p.life <= 0 ||
+            p.y > H + 50
+        ) {
+
+            confetti.splice(i,1);
+
+        }
+
+    }
+
+    requestAnimationFrame(animateConfetti);
+
+}
+
+animateConfetti();
+
+
+function nextScene() {
+
+    document.getElementById("scene1")
+        .classList.add("hidden");
+
+    document.getElementById("scene2")
+        .classList.remove("hidden");
+
+}
+
+
+function cutCake() {
+
+    createConfetti(250);
+
+    setTimeout(function() {
+
+        document.getElementById("scene2")
+            .classList.add("hidden");
+
+        document.getElementById("surprise")
+            .classList.remove("hidden");
+
+        createConfetti(500);
+
+    },2500);
+
+}
+
+
+createConfetti(100);
+
+</script>
+
+</body>
+</html>
